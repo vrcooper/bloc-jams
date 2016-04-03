@@ -93,3 +93,24 @@ window.onload = function() {
     }
 }
 
+// first attempt at changing song number to pause
+var findParentByClassName = function(element, targetClass) {
+    if (element) {
+        var currentParent = element.parentElement;
+        while (currentParent.className != targetClass) {
+            currentParent = currentParent.parentElement;
+        }
+        return currentParent;
+    }
+};
+
+// first attempt at writing getSongItem() Method
+
+getSongItem = function(element) {
+    switch (element) {
+        case .className:
+            return element + .song-item-number;
+        default:
+            return .song-item-number;
+    }
+};
