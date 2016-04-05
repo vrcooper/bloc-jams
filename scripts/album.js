@@ -115,6 +115,7 @@ window.onload = function() {
 }
 
 // first attempt at changing song number to pause
+
 var findParentByClassName = function(element, targetClass) {
     if (element) {
         var currentParent = element.parentElement;
@@ -124,6 +125,7 @@ var findParentByClassName = function(element, targetClass) {
         return currentParent;
     }
 };
+
 
 // first attempt at writing getSongItem() Method
 
