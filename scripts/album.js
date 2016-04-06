@@ -116,16 +116,28 @@ window.onload = function() {
 
 // first attempt at changing song number to pause
 
+var child = document.getElementsByClassName('album-view-title')[0];
+var noParent = document.querySelector('html');
+
 var findParentByClassName = function(element, targetClass) {
-    if (element) {
-        var currentParent = element.parentElement;
-        while (currentParent.className != targetClass) {
-            currentParent = currentParent.parentElement;
+    var currentParent = element.parentElement;
+        
+    if (currentParent) {
+        while (currentParent.className && currentParent.className != targetClass) {
+           currentParent = currentParent.parentElement;
+            } 
+           
+        if (currentParent.className == targetClass) {
+            return currentParent; 
+        }  else {
+            alert("No parent found with that class name");
         }
-        return currentParent;
-    }
+    }  else {
+                alert("No parent found");
+        }         
 };
 
+findParentByClassName(noParent, 'banana');
 
 // first attempt at writing getSongItem() Method
 
