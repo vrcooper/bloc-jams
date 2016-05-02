@@ -165,6 +165,11 @@ var previousSong = function() {
     $lastSongNumberCell.html(lastSongNumber);
 };
 
+var setSong = function(songNumber) {
+    currentlyPlayingSongNumber = currentSongIndex +1;
+    currentSongFromAlbum = currentAlbum.songs + [currentSongIndex];
+};
+
 
 var updatePlayerBarSong = function() {
   
