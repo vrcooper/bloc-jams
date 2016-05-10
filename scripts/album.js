@@ -228,6 +228,25 @@ var updatePlayerBarSong = function() {
     
 };
 
+var $playFromPlayerBar = $('.main-controls .play-pause');
+
+var togglePlayFromPlayerBar = function() {
+    var $currentlyPlayingCell = getSongNumberCell(currentlyPlayingSongNumber)
+    if (currentSongFromAlbum && currentSoundFile) {
+        if (currentSoundFile.isPaused()) {
+            $currentlyPlayingCell.html(pauseButtonTemplate);
+            $(this).html(playerBarPauseButton);
+            currentSoundFile.play();
+            
+        } else {
+            $currentlyPlayingCell.html(playButtonTemplate);
+            $(this).html(playerBarPlayButton);
+            currentSoundFile.pause();
+        }
+    }
+};
+
+
 var $previousButton = $('.main-controls .previous');
 var $nextButton = $('.main-controls .next');
 
@@ -241,5 +260,7 @@ $(document).ready(function() {
     setCurrentAlbum(albumList[i]);
     $previousButton.click(previousSong);
     $nextButton.click(nextSong);
+    
+    $playFromPlayerBar.click(togglePlayFromPlayerBar)
 });
    
