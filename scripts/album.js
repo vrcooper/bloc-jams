@@ -31,11 +31,22 @@ var getSongNumberCell = function(number) {
     return $('.song-item-number[data-song-number="' + number + '"]');
 };
 
+var updatePlayerBarSong = function(htmlPlayPause) {
+    $('.currently-playing .song-name').text(currentSongFromAlbum.title);
+    $('.currently-playing .artist-name').text(currentAlbum.artist);
+    $('.currently-playing .artist-song-mobile').text(currentSongFromAlbum.title + " - " + currentAlbum.artist);
+    
+    $('.main-controls .play-pause').html(htmlPlayPause);
+    
+    setTotalTimeInPlayerBar(filterTimeCode(currentSongFromAlbum.duration));
+};
+
+
 var createSongRow = function (songNumber, songName, songLength) {
     var template = '<tr class="album-view-song-item">'
     + ' <td class="song-item-number" data-song-number="' + songNumber + '">' + songNumber + '</td>'
     + ' <td class="song-item-title">' + songName + '</td>'
-    + ' <td class="song-item-duration">' + songLength + '</td>'
+    + ' <td class="song-item-duration">' + filterTimeCode(songLength) + '</td>'
     + '</tr>'
     ;
     
@@ -137,6 +148,21 @@ var currentSongFromAlbum = null;
 var currentSoundFile = null;
 var currentVolume = 80;
 
+var setCurrentTimeInPlayerBar = function(currentTime) {
+  $('.seek-control.current-time').text(currentTime);  
+};
+
+var setTotalTimeInPlayerBar = function(totalTime) {
+  $('.seek-control .total-time').text(totalTime);  
+};
+
+var filterTimeCode = function(timeInSeconds) {
+    var seconds = Math.floor(parseFloat(timeInSeconds));
+    var minutes = Math.floor(seconds / 60);
+    seconds = seconds % 60;
+    seconds = (seconds < 10 ? '0' + seconds : seconds);
+    return (minutes + ':' + seconds);
+};
 
 var setCurrentAlbum = function(album) {
     currentAlbum = album;
@@ -162,6 +188,7 @@ var updateSeekBarWhileSongPlays = function() {
             var $seekBar = $('.seek-control .seek-bar');
             
            updateSeekPercentage($seekBar, seekBarFillRatio);
+           setCurrentTimeInPlayerBar(filterTimeCode(this.getTime()));
         });
     }
 };
